@@ -3,7 +3,7 @@ from kafka import KafkaConsumer
 from flask import request
 import json
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 # Separate Kafka client logic
 class KafkaClient:
@@ -26,7 +26,7 @@ class KafkaClient:
     #     return messages
 
 # Flask endpoint
-@app.route('/process', methods=['GET'])
+@application.route('/process', methods=['GET'])
 def process():
     # Kafka configuration
     # kafka_bootstrap_servers = 'localhost:9092'  # Replace with your Kafka broker address
@@ -51,4 +51,4 @@ def process():
     return "Hello World!"
 
 if __name__ == "__main__":
-    app.run( host='0.0.0.0', port=8080 )
+    application.run( host='0.0.0.0', port=8080 )
