@@ -18,19 +18,28 @@ def process():
     #     print(message.value.decode())
         
     # Create a MinIO client
-    minio_client = Minio(
-        'minio-service.minio.svc.cluster.local:9000',
+    minio_client = Minio('minio-service.minio.svc.cluster.local:9000',
         access_key='efSZjPmIfTtGUH7NKP4H',
         secret_key='m5CwKsaFxXMxYwZHH3wu6gPlCf0Q7WrNWxkcdA97',
         secure=False  # Set to True if using HTTPS   
     )
+    
+    bucket_name = 'logs'
+    object_name = 'kafka-quickstart-processor/kafka-quickstart-processor-1.txt'
+    temp_file = '/tmp/kafka-quickstart-processor-1.txt'
 
     # Get the object from the bucket
+    # result = minio_client.fget_object(bucket_name, object_name, temp_file)
     response = minio_client.get_object('logs', 'kafka-quickstart-processor/kafka-quickstart-processor-1.txt')
 
     # Read the file line by line
-    for line in response.stream(decode_content=True).splitlines():
-        print(line.decode('utf-8'))  # Print each line
+    # for line in response.stream(decode_content=True).splitlines():
+    #     print(line.decode('utf-8'))  # Print each line
+        
+    # Read line by line
+    for line in response['Body'].iter_lines():
+        line = line.decode('utf-8')
+        print(line)  # Output the line to the console
 
     response.close()
     response.release_conn()
