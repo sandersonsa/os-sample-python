@@ -19,7 +19,7 @@ def process():
         
     # Create a MinIO client
     minio_client = Minio(
-        'http://minio-service.minio.svc.cluster.local:9000',
+        'minio-service.minio.svc.cluster.local:9000',
         access_key='efSZjPmIfTtGUH7NKP4H',
         secret_key='m5CwKsaFxXMxYwZHH3wu6gPlCf0Q7WrNWxkcdA97',
         secure=False  # Set to True if using HTTPS   
