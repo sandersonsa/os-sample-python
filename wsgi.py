@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from kafka import KafkaConsumer
 from flask import request
 from minio import Minio
+import os
 import json
 
 application = Flask(__name__)
@@ -16,11 +17,16 @@ def process():
     # consumer = KafkaConsumer(kafka_topic, bootstrap_servers=[kafka_bootstrap_servers])
     # for message in consumer:
     #     print(message.value.decode())
+    
+    MINIO_ENDPOINT = os.environ.get('MINIO_ENDPOINT')
+    MINIO_ACCESS_KEY = os.environ.get('MINIO_ACCESS_KEY')
+    MINIO_SECRET_KEY = os.environ.get('MINIO_SECRET_KEY')
+
         
     # Create a MinIO client
-    minio_client = Minio('minio-service.minio.svc.cluster.local:9000',
-        access_key='efSZjPmIfTtGUH7NKP4H',
-        secret_key='m5CwKsaFxXMxYwZHH3wu6gPlCf0Q7WrNWxkcdA97',
+    minio_client = Minio(MINIO_ENDPOINT,
+        access_key=MINIO_ACCESS_KEY,
+        secret_key=MINIO_SECRET_KEY,
         secure=False  # Set to True if using HTTPS   
     )
     
