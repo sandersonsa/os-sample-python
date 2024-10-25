@@ -41,11 +41,15 @@ def process():
     # Read the file line by line
     # for line in response.stream(decode_content=True).splitlines():
     #     print(line.decode('utf-8'))  # Print each line
+    
+    # Read the file line by line
+    for line in response.stream(decode_content=True):
+        print(line.decode('utf-8').strip())  # Print each line
         
     # Read line by line
-    for line in response['Body'].iter_lines():
-        line = line.decode('utf-8')
-        print(line)  # Output the line to the console
+    # for line in response['Body'].iter_lines():
+    #     line = line.decode('utf-8')
+    #     print(line)  # Output the line to the console
 
     response.close()
     response.release_conn()
