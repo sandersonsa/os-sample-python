@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from kafka import KafkaConsumer
 from flask import request
+from minio import Minio
 import json
 
 application = Flask(__name__)
